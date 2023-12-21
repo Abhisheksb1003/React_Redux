@@ -1,29 +1,35 @@
 import classes from "./Counter.module.css";
 import { useSelector, useDispatch } from "react-redux";
 
+import { counterActions } from "../Store/Index";
+
 const Counter = () => {
   const dispatch = useDispatch();
-  const counter = useSelector((state) => state.counter);
-  const show = useSelector(state => state.showCounter)
+  const counter = useSelector((state) => state.counter.counter);
+  const show = useSelector((state) => state.counter.showCounter);
+
+  // console.log('show:', show);
+  // console.log('counter', counter)
 
   const incrementHandler = () => {
-    dispatch({ type: "increment" });
+    dispatch(counterActions.increment());
   };
   const decrementHnadler = () => {
-    dispatch({ type: "decrement" });
-  };
-  const incrementby5Handler = () => {
-    dispatch({ type: "incrementby5" });
-  };
-  const decrementby5Handler = () => {
-    dispatch({ type: "decrementby5" });
+    dispatch(counterActions.decrement());
   };
 
-  const incrementby2Handler=()=>{
-    dispatch({type:'increase' , value:2})
-  }
+  const incrementby5Handler = () => {
+    dispatch(counterActions.incrementby5());
+  };
+  const decrementby5Handler = () => {
+    dispatch(counterActions.decrementby5());
+  };
+
+  const incrementby2Handler = () => {
+    dispatch(counterActions.increase(2)); // {type: SOME_UNIQUE_IDENTIFIER , payload:2}
+  };
   const toggleCounterHandler = () => {
-    dispatch({type: 'toggle'})
+    dispatch(counterActions.toggleCounter());
   };
 
   return (
